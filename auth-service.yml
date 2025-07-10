@@ -1,6 +1,10 @@
 server:
   port: 9081
 
+jwt:
+  secret: "ThisIsAReallyLongSecureJwtSecretKeyForHS512AlgorithmThatHasEnoughLength"
+
+
 eureka:
   client:
     service-url:
