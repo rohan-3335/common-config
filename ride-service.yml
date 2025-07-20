@@ -8,6 +8,8 @@ spring:
 jwt:
   secret: "ThisIsAReallyLongSecureJwtSecretKeyForHS512AlgorithmThatHasEnoughLength"
 
+
+
   jpa:
     hibernate:
       ddl-auto: update
