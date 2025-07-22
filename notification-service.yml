@@ -14,7 +14,7 @@ management:
       exposure:
         include: "*"
 
-
+spring:  # ✅ Mail config should go under `spring`, NOT `management`
   mail:
     host: smtp.gmail.com
     port: 587
