@@ -1,59 +1,52 @@
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-
-
-
-
 server:
   port: 8080
 
 spring:
   application:
     name: api-gateway
+
   cloud:
     gateway:
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
-      routes:
-        - id: auth-service
-          uri: lb://AUTH-SERVICE
-          predicates:
-            - Path=/api/auth/**
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true
+              lower-case-service-id: true
 
-        - id: user-service
-          uri: lb://USER-SERVICE
-          predicates:
-            - Path=/api/users/**
+          routes:
+            - id: auth-service
+              uri: lb://AUTH-SERVICE
+              predicates:
+                - Path=/api/auth/**
 
-        - id: ride-service
-          uri: lb://RIDE-SERVICE
-          predicates:
-            - Path=/api/rides/**
+            - id: user-service
+              uri: lb://USER-SERVICE
+              predicates:
+                - Path=/api/users/**
 
-        - id: notification-service
-          uri: lb://NOTIFICATION-SERVICE
-          predicates:
-            - Path=/api/notifications/**
+            - id: ride-service
+              uri: lb://RIDE-SERVICE
+              predicates:
+                - Path=/api/rides/**
 
-        - id: ai-service
-          uri: lb://AI-SERVICE
-          predicates:
-            - Path=/api/ai/**
-      default-filters:
-          - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
+            - id: notification-service
+              uri: lb://NOTIFICATION-SERVICE
+              predicates:
+                - Path=/api/notifications/**
 
-    main:
-      web-application-type: reactive
+            - id: ai-service
+              uri: lb://AI-SERVICE
+              predicates:
+                - Path=/api/ai/**
 
-  jwt:
-    secret: "ThisIsAReallyLongSecureJwtSecretKeyForHS512AlgorithmThatHasEnoughLength"
+          default-filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
 
-#eureka:
-#  client:
-#    service-url:
-#      defaultZone: http://localhost:8761/eureka
+jwt:
+  secret: "ThisIsAReallyLongSecureJwtSecretKeyForHS512AlgorithmThatHasEnoughLength"
